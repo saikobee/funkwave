@@ -30,6 +30,7 @@ from pyglet import clock
 # Modify this scheduled method to pause, probably
 clock.schedule(rabbyt.add_time)
 
+# Silly deprecated code
 #clock.set_fps_limit(60)
 #clock.set_fps_limit(30)
 #clock.set_fps_limit(10)
@@ -83,6 +84,8 @@ pyglet.resource.reindex()
 #DAT_IMG = pyglet.resource.image("bullet.gif")
 
 def make_costumes():
+    '''Get pyglet textures for all the PNGs in costumes/'''
+
     cwd = os.getcwd()
     os.chdir("costumes")
 
@@ -112,6 +115,7 @@ BG_IMG = pyglet.resource.image("bg.png")
 
 i = 0
 def g():
+    '''Makes a single sprite'''
     global i
 
     x = random.randrange(w)
@@ -125,19 +129,6 @@ def g():
     sprite = rabbyt.Sprite(COSTUMES[i])
     i += 1
     i %= len(COSTUMES)
-
-    #sprite.shape.width  = 32
-    #sprite.shape.height = 32 
-
-    # TODO: Not exact!
-    #sprite.tex_shape.width  = 1.0/3.0/3.0
-    #sprite.tex_shape.width  = 1.0/8.0
-    #sprite.tex_shape.height = 1.0/8.0
-    #sprite.tex_shape.left   = 0
-    #sprite.tex_shape.bottom = 0
-
-    # TODO: WHY DOES THIS WORK
-    #sprite.u = rabbyt.lerp(0, 1.0/4.0, dt=4, extend="constant")
 
     sprite.xy = (x, y)
 
@@ -186,10 +177,6 @@ class MainWindow(pyglet.window.Window):
         self.bg = BG_IMG
 
         self.time = 0
-
-        #self.bg.x = rabbyt.lerp(0, w, dt=1, extend="reverse")
-        #self.bg.x = w/2.0
-        #self.bg.y = h/2.0
 
     def update(self, dt):
         self.time += dt
@@ -242,7 +229,7 @@ class MainWindow(pyglet.window.Window):
         fps_display.label.color = (1.0, 1.0, 1.0, 0.50)
         fps_display.label.draw()
 
-def other_main():
+def main():
     window_w = w
     window_h = h
 
@@ -258,11 +245,11 @@ def other_main():
     #window.push_handlers(pyglet.window.event.WindowEventLogger())
     #pyglet.clock.schedule_interval(window.update, 1.0/70.0)
     #pyglet.clock.schedule_interval(window.update, 1.0/4.0)
-    pyglet.clock.schedule_interval(window.update, 1.0/60.0)
+    #pyglet.clock.schedule_interval(window.update, 1.0/60.0)
+    pyglet.clock.schedule_interval(window.update)
     #pyglet.clock.schedule_interval(window.update, 4.0)
     #pyglet.clock.schedule_interval(window.update, 1.0/120)
     #window.update(0)
     pyglet.app.run()
 
-#main_loop()
-other_main()
+main()
