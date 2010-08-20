@@ -1,0 +1,11 @@
+- Code
+    - Hardcode for single player in the beginning
+    - Different types of bullets controlled by controller classes
+    - Don't use global hashes, use modules
+        - controls.left vs controls['left']
+
+- Gameplay
+    - 2 speed settings
+    - 2 shot types
+    - Set amount of bombs
+    - Bullet slowdown on clogged screen
