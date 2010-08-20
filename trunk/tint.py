@@ -65,8 +65,8 @@ fps_display = pyglet.clock.ClockDisplay()
 
 pyglet.resource.path = [
     ".",
-    "alpha",
     "art",
+    "alpha",
     "shapes",
     "costumes",
     "backgrounds",
