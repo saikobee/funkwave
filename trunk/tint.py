@@ -44,6 +44,7 @@ clock.schedule(rabbyt.add_time)
 #w, h = size =  800, 450
 w, h = size =  640, 360
 #w, h = size =  320, 180
+#w, h = size =  160,  90
 
 # 3:4
 #w, h = size = 800, 600
@@ -178,6 +179,8 @@ class MainWindow(pyglet.window.Window):
 
         self.sprites = [g() for i in xrange(num_sprites)]
 
+        fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
+
         self.bg = BG_IMG
 
         self.time = 0
@@ -214,7 +217,7 @@ class MainWindow(pyglet.window.Window):
 
         rabbyt.render_unsorted(self.sprites)
 
-        self.draw_fps()
+        fps_display.label.draw()
 
         if self.scale_needed(): self.viewport.end()
 
@@ -224,18 +227,16 @@ class MainWindow(pyglet.window.Window):
     def scale_needed(self):
         return not (self.width == w and self.height == h)
 
-    def draw_fps(self):
-        fps_display.label.color = (0.0, 0.0, 0.0, 0.75)
-        fps_display.label.draw()
-        fps_display.label.color = (1.0, 1.0, 1.0, 0.50)
-        fps_display.label.draw()
-
 def main():
     window_w = w
     window_h = h
 
     #window_w = 1280
     #window_h =  720
+    #window_w = 1024
+    #window_h =  576
+    #window_w =  800
+    #window_h =  450
 
     window = MainWindow(width=window_w, height=window_h, vsync=False)
     #window = MainWindow(vsync=False, fullscreen=True)
