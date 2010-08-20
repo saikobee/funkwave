@@ -125,7 +125,7 @@ def main():
     )
     rabbyt.set_default_attribs()
     #pyglet.clock.schedule_interval(window.update, 1.0/60.0)
-    pyglet.clock.schedule_interval(window.update)
+    pyglet.clock.schedule(window.update)
     pyglet.app.run()
 
 main()

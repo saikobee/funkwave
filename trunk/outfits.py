@@ -39,8 +39,8 @@ clock.schedule(rabbyt.add_time)
 #w, h = size = 1366, 768
 #w, h = size = 1280, 720
 #w, h = size = 1024, 576
-w, h = size =  800, 450
-#w, h = size =  640, 360
+#w, h = size =  800, 450
+w, h = size =  640, 360
 #w, h = size =  320, 180
 
 # 3:4
@@ -66,6 +66,7 @@ pyglet.resource.path = [
     "art",
     "shapes",
     "costumes",
+    "backgrounds",
 ]
 pyglet.resource.reindex()
 
@@ -246,7 +247,7 @@ def main():
     #pyglet.clock.schedule_interval(window.update, 1.0/70.0)
     #pyglet.clock.schedule_interval(window.update, 1.0/4.0)
     #pyglet.clock.schedule_interval(window.update, 1.0/60.0)
-    pyglet.clock.schedule_interval(window.update)
+    pyglet.clock.schedule(window.update)
     #pyglet.clock.schedule_interval(window.update, 4.0)
     #pyglet.clock.schedule_interval(window.update, 1.0/120)
     #window.update(0)
