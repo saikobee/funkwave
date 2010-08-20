@@ -20,8 +20,8 @@ clock.schedule(rabbyt.add_time)
 #w, h = size = 1366, 768
 #w, h = size = 1280, 720
 #w, h = size = 1024, 576
-w, h = size =  800, 450
-#w, h = size =  640, 360
+#w, h = size =  800, 450
+w, h = size =  640, 360
 #w, h = size =  320, 180
 
 # 3:4
