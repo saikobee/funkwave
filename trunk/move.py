@@ -205,11 +205,9 @@ class MainWindow(pyglet.window.Window):
         if self.scale_needed(): self.viewport.begin()
 
         rabbyt.clear()
-        
         self.reset_color_hack()
 
         self.bg.blit(0, 0, 0)
-
         self.sprite.render()
 
         fps_display.label.draw()
