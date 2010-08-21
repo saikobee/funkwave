@@ -173,33 +173,32 @@ class MainWindow(pyglet.window.Window):
     def update(self, dt):
         self.time += dt
 
-        self.sprite.update()
+        self.sprite.update(dt)
 
     def on_key_press(self, symbol, modifiers):
         from pyglet.window import key
 
+        # Simple value toggles
         if symbol == key.F:
             self.set_fullscreen(not self.fullscreen)
         elif symbol == key.V:
             self.set_vsync(not self.vsync)
+
         elif symbol == key.ESCAPE:
             self.close()
-        elif symbol == key.UP:
-            self.sprite.go_up()
-        elif symbol == key.LEFT:
-            self.sprite.go_left()
-        elif symbol == key.DOWN:
-            self.sprite.go_down()
-        elif symbol == key.RIGHT:
-            self.sprite.go_right()
+
+        elif symbol == key.UP:    self.sprite.go_up()
+        elif symbol == key.LEFT:  self.sprite.go_left()
+        elif symbol == key.DOWN:  self.sprite.go_down()
+        elif symbol == key.RIGHT: self.sprite.go_right()
 
     def on_key_release(self, symbol, modifiers):
         from pyglet.window import key
 
-        if symbol in [key.UP, key.DOWN]:
-            self.sprite.pop_y()
-        elif symbol in [key.LEFT, key.RIGHT]:
-            self.sprite.pop_x()
+        if   symbol == key.UP:    self.sprite.pop_up()
+        elif symbol == key.LEFT:  self.sprite.pop_left()
+        elif symbol == key.DOWN:  self.sprite.pop_down()
+        elif symbol == key.RIGHT: self.sprite.pop_right()
 
     def on_draw(self):
         if self.scale_needed(): self.viewport.begin()
