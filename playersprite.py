@@ -1,4 +1,5 @@
 import rabbyt
+
 from intsprite import IntSprite
 
 class PlayerSprite(IntSprite):
@@ -23,4 +24,4 @@ class PlayerSprite(IntSprite):
     def update(self, dt):
         self.xf += self.vx() * dt
         self.yf += self.vy() * dt
-        self.truncate(self)
+        self.truncate_coords()
