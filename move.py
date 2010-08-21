@@ -181,7 +181,6 @@ class MainWindow(pyglet.window.Window):
             self.set_vsync(not self.vsync)
         elif symbol == key.ESCAPE:
             self.close()
-
         elif symbol == key.W:
             self.sprite.yf += 1
         elif symbol == key.A:
@@ -191,7 +190,7 @@ class MainWindow(pyglet.window.Window):
         elif symbol == key.D:
             self.sprite.xf += 1 
     
-    IntSprite.truncate(self.sprite)
+        IntSprite.truncate(self.sprite)
 
     def on_draw(self):
         if self.scale_needed(): self.viewport.begin()
@@ -202,7 +201,7 @@ class MainWindow(pyglet.window.Window):
 
         self.bg.blit(0, 0, 0)
 
-    self.sprite.render()
+        self.sprite.render()
 
         fps_display.label.draw()
 
