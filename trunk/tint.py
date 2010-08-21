@@ -150,9 +150,9 @@ def g():
     #sprite.x = rabbyt.ease_out(x, x2, dt=dt_x, extend="reverse")
     #sprite.y = rabbyt.ease_in( y, y2, dt=dt_y, extend="reverse")
 
-    rgb1 = (1.0, 0.0, 0.0)
-    rgb2 = (0.0, 1.0, 0.0)
-    rgb3 = (0.0, 0.0, 1.0)
+    #rgb1 = (1.0, 0.0, 0.0)
+    #rgb2 = (0.0, 1.0, 0.0)
+    #rgb3 = (0.0, 0.0, 1.0)
     #sprite.rgb   = rabbyt.chain(
     #    rabbyt.lerp(rgb1, rgb2, dt=5),
     #    rabbyt.lerp(rgb2, rgb3, dt=5, extend="reverse")

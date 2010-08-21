@@ -134,9 +134,9 @@ def g():
     #sprite.x = rabbyt.ease_out(x, x2, dt=dt_x, extend="reverse")
     #sprite.y = rabbyt.ease_in( y, y2, dt=dt_y, extend="reverse")
 
-    rgb1 = (1.0, 0.0, 0.0)
-    rgb2 = (0.0, 1.0, 0.0)
-    rgb3 = (0.0, 0.0, 1.0)
+    #rgb1 = (1.0, 0.0, 0.0)
+    #rgb2 = (0.0, 1.0, 0.0)
+    #rgb3 = (0.0, 0.0, 1.0)
     #sprite.rgb   = rabbyt.chain(
     #    rabbyt.lerp(rgb1, rgb2, dt=5),
     #    rabbyt.lerp(rgb2, rgb3, dt=5, extend="reverse")
@@ -181,16 +181,17 @@ class MainWindow(pyglet.window.Window):
             self.set_vsync(not self.vsync)
         elif symbol == key.ESCAPE:
             self.close()
-	elif symbol == key.W:
-	    self.sprite.yf += 1
-	elif symbol == key.A:
-	    self.sprite.xf -= 1
-	elif symbol == key.S:
-	    self.sprite.yf -= 1
-	elif symbol == key.D:
-	    self.sprite.xf += 1	
-	
-	IntSprite.truncate([self.sprite])
+
+        elif symbol == key.W:
+            self.sprite.yf += 1
+        elif symbol == key.A:
+            self.sprite.xf -= 1
+        elif symbol == key.S:
+            self.sprite.yf -= 1
+        elif symbol == key.D:
+            self.sprite.xf += 1 
+    
+    IntSprite.truncate(self.sprite)
 
     def on_draw(self):
         if self.scale_needed(): self.viewport.begin()
@@ -201,7 +202,7 @@ class MainWindow(pyglet.window.Window):
 
         self.bg.blit(0, 0, 0)
 
-	self.sprite.render()
+    self.sprite.render()
 
         fps_display.label.draw()
 
