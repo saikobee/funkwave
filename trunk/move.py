@@ -10,7 +10,7 @@ import pyglet
 from pyglet.gl  import *
 from fshelper   import *
 
-from intsprite import IntSprite
+from playersprite import PlayerSprite
 
 random.seed(0)
 
@@ -116,7 +116,7 @@ def g():
     #sprite = rabbyt.Sprite(DAT_IMG)
     #sprite = rabbyt.Sprite(random.choice(COSTUMES))
     #sprite = rabbyt.Sprite(COSTUMES[i])
-    sprite = IntSprite(PLAYER_IMG)
+    sprite = PlayerSprite(PLAYER_IMG)
     i += 1
 
     sprite.xyf = (x, y)
@@ -162,6 +162,7 @@ class MainWindow(pyglet.window.Window):
         self.set_mouse_visible(False)
 
         self.sprite = g()
+        PlayerSprite.truncate(self.sprite)
 
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
 
@@ -172,6 +173,11 @@ class MainWindow(pyglet.window.Window):
     def update(self, dt):
         self.time += dt
 
+        self.sprite.xf += self.sprite.vx
+        self.sprite.yf += self.sprite.vy
+
+        PlayerSprite.truncate(self.sprite)
+
     def on_key_press(self, symbol, modifiers):
         from pyglet.window import key
 
@@ -181,16 +187,27 @@ class MainWindow(pyglet.window.Window):
             self.set_vsync(not self.vsync)
         elif symbol == key.ESCAPE:
             self.close()
-        elif symbol == key.W:
-            self.sprite.yf += 1
-        elif symbol == key.A:
-            self.sprite.xf -= 1
-        elif symbol == key.S:
-            self.sprite.yf -= 1
-        elif symbol == key.D:
-            self.sprite.xf += 1 
+        elif symbol == key.UP:
+            self.sprite.vy = 1
+        elif symbol == key.LEFT:
+            self.sprite.vx = -1
+        elif symbol == key.DOWN:
+            self.sprite.vy = -1
+        elif symbol == key.RIGHT:
+            self.sprite.vx = 1 
+
+    def on_key_release(self, symbol, modifiers):
+        from pyglet.window import key
+
+        if symbol == key.UP:
+            self.sprite.vy = 0
+        elif symbol == key.LEFT:
+            self.sprite.vx = 0 
+        elif symbol == key.DOWN:
+            self.sprite.vy = 0
+        elif symbol == key.RIGHT:
+            self.sprite.vx = 0 
     
-        IntSprite.truncate(self.sprite)
 
     def on_draw(self):
         if self.scale_needed(): self.viewport.begin()
