@@ -59,7 +59,7 @@ w, h = size =  640, 360
 #w, h = size =  160,  100
 
 #filtered = True
-iltered = False
+filtered = False
 
 fps_display = pyglet.clock.ClockDisplay()
 
