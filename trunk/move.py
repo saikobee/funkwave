@@ -196,10 +196,10 @@ class MainWindow(pyglet.window.Window):
     def on_key_release(self, symbol, modifiers):
         from pyglet.window import key
 
-        if   symbol == key.UP:    self.sprite.pop_up()
-        elif symbol == key.LEFT:  self.sprite.pop_left()
-        elif symbol == key.DOWN:  self.sprite.pop_down()
-        elif symbol == key.RIGHT: self.sprite.pop_right()
+        if   symbol == key.UP:    self.sprite.stop_up()
+        elif symbol == key.LEFT:  self.sprite.stop_left()
+        elif symbol == key.DOWN:  self.sprite.stop_down()
+        elif symbol == key.RIGHT: self.sprite.stop_right()
 
     def on_draw(self):
         if self.scale_needed(): self.viewport.begin()
