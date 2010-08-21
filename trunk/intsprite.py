@@ -14,3 +14,7 @@ class IntSprite(rabbyt.Sprite):
     @staticmethod
     def truncate_list(sprites):
         self.truncate(*sprites)
+
+    def truncate_coords(self):
+        self.x = int(self.xf)
+        self.y = int(self.yf)

@@ -162,7 +162,8 @@ class MainWindow(pyglet.window.Window):
         self.set_mouse_visible(False)
 
         self.sprite = g()
-        PlayerSprite.truncate(self.sprite)
+        #PlayerSprite.truncate(self.sprite)
+        self.sprite.truncate_coords()
 
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
 
