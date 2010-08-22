@@ -3,6 +3,8 @@ from pyglet import clock
 from bullet    import Bullet
 from intsprite import IntSprite
 
+import math
+
 class ParaFactory:
     '''\
     This class manages spawning bullets at a certain rate and making them
@@ -60,6 +62,15 @@ class ParaFactory:
         '''Toggles between play and pause.'''
         if paused: self.play()
         else:      self.pause()
+
+class LineFactory(ParaFactory, object):
+    def __init__(self, angle, sprite, spawn_rate, age_factor=1):
+        self.angle = angle
+
+        self.x = lambda t: math.cos(angle) * t
+        self.y = lambda t: math.sin(angle) * t
+
+        super(LineFactory, self).__init__(self.x, self.y, sprite, spawn_rate, age_factor)
 
 class Point:
     def __init__(point):
