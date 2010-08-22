@@ -58,17 +58,6 @@ filtered = False
 
 fps_display = pyglet.clock.ClockDisplay()
 
-def cartesian(polar):
-    r, theta = polar
-
-    x = r * math.cos(theta)
-    y = r * math.sin(theta)
-
-    x += w/2.0
-    y += h/2.0
-
-    return (x, y)
-
 PLAYER_IMG = pyglet.resource.image("brunette.png")
 BG_IMG     = pyglet.resource.image("bg.png")
 

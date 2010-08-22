@@ -67,10 +67,19 @@ class LineFactory(ParaFactory):
     def __init__(self, angle, sprite, spawn_rate, age_factor=1):
         self.angle = angle
 
-        self.x = lambda t: math.cos(math.radians(angle)) * t
-        self.y = lambda t: math.sin(math.radians(angle)) * t
+        x = lambda t: math.cos(math.radians(angle)) * t
+        y = lambda t: math.sin(math.radians(angle)) * t
 
-        super(LineFactory, self).__init__(self.x, self.y, sprite, spawn_rate, age_factor)
+        super(LineFactory, self).__init__(x, y, sprite, spawn_rate, age_factor)
+
+class PolarFactory(ParaFactory):
+    def __init__(self, r, sprite, spawn_rate, age_factor=1):
+        self.r = r
+
+        x = lambda t: self.r(t) * math.cos(math.radians(t))
+        y = lambda t: self.r(t) * math.sin(math.radians(t))
+
+        super(LineFactory, self).__init__(x, y, sprite, spawn_rate, age_factor)
 
 class Point(object):
     def __init__(point):
