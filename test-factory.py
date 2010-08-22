@@ -61,7 +61,7 @@ fps_display = pyglet.clock.ClockDisplay()
 #PLAYER_IMG = pyglet.resource.image("brunette.png")
 #PLAYER_IMG = pyglet.resource.image("black-hair.png")
 #PLAYER_IMG = pyglet.resource.image("black-hair2.png")
-PLAYER_IMG = pyglet.resource.image("spot.png")
+PLAYER_IMG = pyglet.resource.image("spots.png")
 BG_IMG     = pyglet.resource.image("bg.png")
 
 class MainWindow(pyglet.window.Window):
