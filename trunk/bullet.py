@@ -13,6 +13,8 @@ class Bullet(IntSprite):
         self.age = 0 
         self.x0 = x0
         self.y0 = y0
+        self.x  = x0
+        self.y  = y0
 
     def __repr__(self):
         return "Bullet<xyf=(%f, %f), xy=(%i, %i), age=%i>" % (

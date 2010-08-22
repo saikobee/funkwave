@@ -20,10 +20,17 @@ class PlayerSprite(IntSprite):
     def vx(self): return self.x_keys[-1] * self.v_max
     def vy(self): return self.y_keys[-1] * self.v_max
 
-    def stop_left(self):  self.x_keys.remove(-1)
-    def stop_right(self): self.x_keys.remove( 1)
-    def stop_up(self):    self.y_keys.remove( 1)
-    def stop_down(self):  self.y_keys.remove(-1)
+    def stop_left(self):
+        if -1 in self.x_keys: self.x_keys.remove(-1)
+
+    def stop_right(self):
+        if  1 in self.x_keys: self.x_keys.remove( 1)
+
+    def stop_up(self):
+        if  1 in self.y_keys: self.y_keys.remove( 1)
+
+    def stop_down(self):
+        if -1 in self.y_keys: self.y_keys.remove(-1)
 
     def update(self, dt):
         '''\
