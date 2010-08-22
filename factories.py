@@ -67,8 +67,8 @@ class LineFactory(ParaFactory):
     def __init__(self, angle, sprite, spawn_rate, age_factor=1):
         self.angle = angle
 
-        self.x = lambda t: math.cos(angle) * t
-        self.y = lambda t: math.sin(angle) * t
+        self.x = lambda t: math.cos(math.radians(angle)) * t
+        self.y = lambda t: math.sin(math.radians(angle)) * t
 
         super(LineFactory, self).__init__(self.x, self.y, sprite, spawn_rate, age_factor)
 
