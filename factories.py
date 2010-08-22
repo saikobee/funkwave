@@ -47,9 +47,20 @@ class ParaFactory:
             IntSprite.truncate_list(self.bullets)
 
     def pause(self):
+        '''Pause the creation and aging of bullets.'''
         paused = True
         clock.unschedule(self.spawn_bullet)
 
     def play(self):
+        '''Resume the creation and aging of bullets.'''
         paused = False
         clock.schedule(self.spawn_bullet)
+
+    def toggle(self):
+        '''Toggles between play and pause.'''
+        if paused: self.play()
+        else:      self.pause()
+
+class Point:
+    def __init__(point):
+        self.x, self.y = point
