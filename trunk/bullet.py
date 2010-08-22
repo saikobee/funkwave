@@ -15,4 +15,10 @@ class Bullet(IntSprite):
         self.y0 = y0
 
     def __repr__(self):
-        return "Bullet<xyf=(%f, %f), xy=(%i, %i), age=%i>" % (self.xf, self.yf, self.x, self.y, self.age)
+        return "Bullet<xyf=(%f, %f), xy=(%i, %i), age=%i>" % (
+            self.xf,
+            self.yf,
+            self.x,
+            self.y,
+            self.age
+        )
