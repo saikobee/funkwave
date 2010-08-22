@@ -22,7 +22,9 @@ class ParaFactory:
 
         self.bullets = []
 
-        clock.schedule_interval(self.spawn_bullet, 1.0/spawn_rate)
+        self.paused = False
+
+        #clock.schedule_interval(self.spawn_bullet, 1.0/spawn_rate)
 
     def spawn_bullet(self, dt):
         '''\
@@ -34,9 +36,18 @@ class ParaFactory:
         '''\
         Ages the bullets the factory manages and updates their positions.
         '''
-        for bullet in self.bullets:
-            bullet.age += dt
-            bullet.xf = self.x(self.age_factor * bullet.age)
-            bullet.yf = self.y(self.age_factor * bullet.age)
+        if not self.paused:
+            for bullet in self.bullets:
+                bullet.age += dt
+                bullet.xf = self.x(self.age_factor * bullet.age)
+                bullet.yf = self.y(self.age_factor * bullet.age)
 
-        IntSprite.truncate_list(self.bullets)
+            IntSprite.truncate_list(self.bullets)
+
+    def pause(self):
+        paused = True
+        clock.unschedule(self.spawn_bullet)
+
+    def play(self):
+        paused = False
+        clock.schedule(self.spawn_bullet)
