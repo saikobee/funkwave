@@ -5,7 +5,7 @@ from intsprite import IntSprite
 
 import math
 
-class ParaFactory:
+class ParaFactory(object):
     '''\
     This class manages spawning bullets at a certain rate and making them
     travel a given path determined by a parametric equation.
@@ -63,7 +63,7 @@ class ParaFactory:
         if paused: self.play()
         else:      self.pause()
 
-class LineFactory(ParaFactory, object):
+class LineFactory(ParaFactory):
     def __init__(self, angle, sprite, spawn_rate, age_factor=1):
         self.angle = angle
 
@@ -72,6 +72,6 @@ class LineFactory(ParaFactory, object):
 
         super(LineFactory, self).__init__(self.x, self.y, sprite, spawn_rate, age_factor)
 
-class Point:
+class Point(object):
     def __init__(point):
         self.x, self.y = point
