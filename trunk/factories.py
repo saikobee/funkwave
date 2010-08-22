@@ -1,6 +1,7 @@
 from pyglet import clock
 
-from bullet import Bullet
+from bullet    import Bullet
+from intsprite import IntSprite
 
 class ParaFactory:
     '''\
@@ -36,3 +37,5 @@ class ParaFactory:
             bullet.age += dt
             bullet.xf = self.x(bullet.age)
             bullet.yf = self.y(bullet.age)
+
+        IntSprite.truncate_list(self.bullets)
