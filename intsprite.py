@@ -25,7 +25,7 @@ class IntSprite(rabbyt.Sprite):
         '''\
         Like truncate_coords, but operates on a list of args.
         '''
-        self.truncate(*sprites)
+        IntSprite.truncate(*sprites)
 
     def truncate_coords(self):
         '''\

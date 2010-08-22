@@ -7,35 +7,30 @@ import random
 import rabbyt
 import pyglet
 
+pyglet.resource.path = [
+    ".",
+    "art",
+    "alpha",
+    "shapes",
+    "bullets",
+    "costumes",
+    "backgrounds",
+]
+pyglet.resource.reindex()
+
 from pyglet.gl  import *
 from fshelper   import *
 
 from playersprite import PlayerSprite
+from factories    import ParaFactory
 
 random.seed(0)
-
-#num_sprites = 2000
-#num_sprites = 1000
-#num_sprites =  750
-#num_sprites =  500
-#num_sprites =  250
-#num_sprites =  100
-#num_sprites =   50
-#num_sprites =   10
-#num_sprites =    2
-#num_sprites =    1
-#num_sprites =    0
 
 from pyglet import font
 from pyglet import clock
 
 # Modify this scheduled method to pause, probably
 clock.schedule(rabbyt.add_time)
-
-# Silly deprecated code
-#clock.set_fps_limit(60)
-#clock.set_fps_limit(30)
-#clock.set_fps_limit(10)
 
 # 16:9
 #w, h = size = 1366, 768
@@ -63,30 +58,6 @@ filtered = False
 
 fps_display = pyglet.clock.ClockDisplay()
 
-pyglet.resource.path = [
-    ".",
-    "art",
-    "alpha",
-    "shapes",
-    "costumes",
-    "backgrounds",
-]
-pyglet.resource.reindex()
-
-#DAT_IMG = pyglet.resource.image("player.png")
-#DAT_IMG = pyglet.resource.image("player2.png")
-#DAT_IMG = pyglet.resource.image("player3.png")
-#DAT_IMG = pyglet.resource.image("player4.png")
-#IDAT_IMG = pyglet.resource.image("player5.png")
-#DAT_IMG = pyglet.resource.image("player6.png")
-#DAT_IMG = pyglet.resource.image("player7.png")
-#DAT_IMG = pyglet.resource.image("alpha4x.png")
-#DAT_IMG = pyglet.resource.image("shapes.png")
-#DAT_IMG = pyglet.resource.image("shapes2.png")
-#DAT_IMG = pyglet.resource.image("shapes.gif")
-#DAT_IMG = pyglet.resource.image("faces.png")
-#DAT_IMG = pyglet.resource.image("bullet.gif")
-
 def cartesian(polar):
     r, theta = polar
 
@@ -99,54 +70,7 @@ def cartesian(polar):
     return (x, y)
 
 PLAYER_IMG = pyglet.resource.image("brunette.png")
-
-BG_IMG = pyglet.resource.image("bg.png")
-
-i = 0
-def g():
-    '''Makes a single sprite'''
-    global i
-
-    x = random.randrange(w)
-    y = random.randrange(h)
-
-    x2 = (x + random.randrange(w)) / 2.0
-    y2 = (y + random.randrange(h)) / 2.0
-
-    #sprite = rabbyt.Sprite(DAT_IMG)
-    #sprite = rabbyt.Sprite(random.choice(COSTUMES))
-    #sprite = rabbyt.Sprite(COSTUMES[i])
-    sprite = PlayerSprite(PLAYER_IMG)
-    i += 1
-
-    sprite.xyf = (x, y)
-
-    #sprite.scale = 0.50
-    #sprite.scale = 2.00
-
-    #sprite.scale = rabbyt.ease(0.75,   1.25, dt=2, extend="reverse")
-    #sprite.rot   = rabbyt.ease(0.00, 360.00, dt=4, extend="reverse")
-    #sprite.rot   = rabbyt.ease(-10.00, 10.00, dt=2, extend="reverse")
-
-    #dt_x = abs(x2 - x) / 16.0
-    #dt_y = abs(y2 - y) / 16.0
-
-    #sprite.x = rabbyt.ease_out(x, x2, dt=dt_x, extend="reverse")
-    #sprite.y = rabbyt.ease_in( y, y2, dt=dt_y, extend="reverse")
-
-    #rgb1 = (1.0, 0.0, 0.0)
-    #rgb2 = (0.0, 1.0, 0.0)
-    #rgb3 = (0.0, 0.0, 1.0)
-    #sprite.rgb   = rabbyt.chain(
-    #    rabbyt.lerp(rgb1, rgb2, dt=5),
-    #    rabbyt.lerp(rgb2, rgb3, dt=5, extend="reverse")
-    #)
-    #sprite.red   = rabbyt.lerp(0.50, 1.00, dt=2, extend="reverse")
-    #sprite.green = rabbyt.lerp(0.50, 1.00, dt=2, extend="reverse")
-    #sprite.blue  = rabbyt.lerp(0.50, 1.00, dt=2, extend="reverse")
-    #sprite.alpha = rabbyt.lerp(0.25, 0.75, dt=1, extend="reverse")
-
-    return sprite
+BG_IMG     = pyglet.resource.image("bg.png")
 
 class MainWindow(pyglet.window.Window):
     def __init__(self, *args, **kwargs):
@@ -161,9 +85,16 @@ class MainWindow(pyglet.window.Window):
 
         self.set_mouse_visible(False)
 
-        self.sprite = g()
+        self.sprite = PlayerSprite(PLAYER_IMG)
+        self.sprite.xyf = (w/4, h/2) 
         #PlayerSprite.truncate(self.sprite)
         self.sprite.truncate_coords()
+
+        self.factory = ParaFactory(
+            lambda t: 2*t,
+            lambda t: 3*t,
+            4
+        )
 
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
 
@@ -175,6 +106,11 @@ class MainWindow(pyglet.window.Window):
         self.time += dt
 
         self.sprite.update(dt)
+        self.factory.update(dt)
+
+        rabbyt.render_unsorted(self.factory.bullets)
+
+        print self.factory.bullets
 
     def on_key_press(self, symbol, modifiers):
         from pyglet.window import key
