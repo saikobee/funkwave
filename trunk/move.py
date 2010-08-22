@@ -91,8 +91,9 @@ class MainWindow(pyglet.window.Window):
         self.sprite.truncate_coords()
 
         self.factory = ParaFactory(
-            lambda t: self.sprite.x + 10*t,
-            lambda t: h/2,
+            lambda t: 10*t,
+            lambda t: 0,
+            self.sprite,
             2,
             16
         )

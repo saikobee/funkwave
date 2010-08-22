@@ -9,13 +9,15 @@ class ParaFactory:
     travel a given path determined by a parametric equation.
     '''
 
-    def __init__(self, x, y, spawn_rate, age_factor=1):
+    def __init__(self, x, y, sprite, spawn_rate, age_factor=1):
         '''\
         x and y are the parametric functions that determine the
         path bullets take. spawn_rate is how many bullets appear per second.
         '''
         self.x = x
         self.y = y
+
+        self.sprite = sprite
 
         self.spawn_rate = spawn_rate
         self.age_factor = age_factor
@@ -30,7 +32,7 @@ class ParaFactory:
         '''\
         Spawns a single bullet.
         '''
-        self.bullets.append(Bullet())
+        self.bullets.append(Bullet(self.sprite.x, self.sprite.y))
 
     def update(self, dt):
         '''\
@@ -39,8 +41,8 @@ class ParaFactory:
         if not self.paused:
             for bullet in self.bullets:
                 bullet.age += dt
-                bullet.xf = self.x(self.age_factor * bullet.age)
-                bullet.yf = self.y(self.age_factor * bullet.age)
+                bullet.xf = self.x(self.age_factor * bullet.age) + bullet.x0
+                bullet.yf = self.y(self.age_factor * bullet.age) + bullet.y0
 
             IntSprite.truncate_list(self.bullets)
 
