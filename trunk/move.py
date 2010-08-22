@@ -91,8 +91,8 @@ class MainWindow(pyglet.window.Window):
         self.sprite.truncate_coords()
 
         self.factory = ParaFactory(
-            lambda t: 2*t,
-            lambda t: 3*t,
+            lambda t: self.sprite.x + 10*t,
+            lambda t: h/2,
             2,
             16
         )
@@ -126,6 +126,8 @@ class MainWindow(pyglet.window.Window):
         elif symbol == key.DOWN:  self.sprite.go_down()
         elif symbol == key.RIGHT: self.sprite.go_right()
 
+        elif symbol == key.S: self.factory.play()
+
     def on_key_release(self, symbol, modifiers):
         from pyglet.window import key
 
@@ -133,6 +135,8 @@ class MainWindow(pyglet.window.Window):
         elif symbol == key.LEFT:  self.sprite.stop_left()
         elif symbol == key.DOWN:  self.sprite.stop_down()
         elif symbol == key.RIGHT: self.sprite.stop_right()
+
+        elif symbol == key.S: self.factory.pause()
 
     def on_draw(self):
         if self.scale_needed(): self.viewport.begin()
