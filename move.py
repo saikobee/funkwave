@@ -95,7 +95,8 @@ class MainWindow(pyglet.window.Window):
             lambda t: 0,
             self.sprite,
             2,
-            16
+            #16
+            64
         )
 
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
