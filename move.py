@@ -91,9 +91,10 @@ class MainWindow(pyglet.window.Window):
         self.sprite.truncate_coords()
 
         self.factory = ParaFactory(
-            lambda t: 32*t,
-            lambda t: 48*t,
-            2
+            lambda t: 2*t,
+            lambda t: 3*t,
+            2,
+            16
         )
 
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
