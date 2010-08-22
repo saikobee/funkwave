@@ -91,9 +91,9 @@ class MainWindow(pyglet.window.Window):
         self.sprite.truncate_coords()
 
         self.factory = ParaFactory(
-            lambda t: 2*t,
-            lambda t: 3*t,
-            4
+            lambda t: 32*t,
+            lambda t: 48*t,
+            2
         )
 
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
@@ -107,10 +107,6 @@ class MainWindow(pyglet.window.Window):
 
         self.sprite.update(dt)
         self.factory.update(dt)
-
-        rabbyt.render_unsorted(self.factory.bullets)
-
-        print self.factory.bullets
 
     def on_key_press(self, symbol, modifiers):
         from pyglet.window import key
@@ -145,6 +141,7 @@ class MainWindow(pyglet.window.Window):
 
         self.bg.blit(0, 0, 0)
         self.sprite.render()
+        rabbyt.render_unsorted(self.factory.bullets)
 
         fps_display.label.draw()
 
