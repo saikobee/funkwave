@@ -23,6 +23,7 @@ from fshelper   import *
 
 from playersprite import PlayerSprite
 from factories    import ParaFactory
+from shots        import Shot1
 
 random.seed(0)
 
@@ -74,19 +75,21 @@ class MainWindow(pyglet.window.Window):
 
         self.set_mouse_visible(False)
 
-        self.sprite = PlayerSprite(PLAYER_IMG)
+        self.sprite = PlayerSprite()
         self.sprite.xyf = (w/4, h/2) 
         #PlayerSprite.truncate(self.sprite)
         self.sprite.truncate_coords()
 
-        self.factory = ParaFactory(
-            lambda t: 10*t,
-            lambda t: 0,
-            self.sprite,
-            2,
-            #16
-            64
-        )
+        #self.factory = ParaFactory(
+        #    lambda t: 10*t,
+        #    lambda t: 0,
+        #    self.sprite,
+        #    2,
+        #    #16
+        #    64
+        #)
+
+        self.factory = Shot1(self.sprite)
 
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
 
@@ -137,7 +140,11 @@ class MainWindow(pyglet.window.Window):
 
         self.bg.blit(0, 0, 0)
         self.sprite.render()
-        rabbyt.render_unsorted(self.factory.bullets)
+
+        for factory in self.factory.factories:
+            rabbyt.render_unsorted(factory.bullets)
+
+        #rabbyt.render_unsorted(self.factory.bullets)
 
         fps_display.label.draw()
 
