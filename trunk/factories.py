@@ -55,6 +55,7 @@ class ParaFactory(object):
     def play(self):
         '''Resume the creation and aging of bullets.'''
         self.paused = False
+        self.spawn_bullet(0)
         clock.schedule_interval(self.spawn_bullet, 1.0/self.spawn_rate)
 
     def toggle(self):
