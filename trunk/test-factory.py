@@ -58,12 +58,6 @@ filtered = True
 
 fps_display = pyglet.clock.ClockDisplay()
 
-#PLAYER_IMG = pyglet.resource.image("brunette.png")
-#PLAYER_IMG = pyglet.resource.image("black-hair.png")
-#PLAYER_IMG = pyglet.resource.image("black-hair2.png")
-PLAYER_IMG = pyglet.resource.image("spots.png")
-BG_IMG     = pyglet.resource.image("bg.png")
-
 class MainWindow(pyglet.window.Window):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
@@ -77,7 +71,7 @@ class MainWindow(pyglet.window.Window):
 
         self.set_mouse_visible(False)
 
-        self.sprite = PlayerSprite(PLAYER_IMG)
+        self.sprite = PlayerSprite()
         self.sprite.xyf = (w/4, h/2) 
         #PlayerSprite.truncate(self.sprite)
         self.sprite.truncate_coords()
@@ -107,7 +101,7 @@ class MainWindow(pyglet.window.Window):
 
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
 
-        self.bg = BG_IMG
+        self.bg = pyglet.resource.image("bg.png")
 
         self.time = 0
 

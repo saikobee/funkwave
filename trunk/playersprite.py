@@ -1,3 +1,4 @@
+import pyglet
 import rabbyt
 
 from intsprite import IntSprite
@@ -7,10 +8,19 @@ class PlayerSprite(IntSprite):
     This class helps to manage the tricky business of using a keyboard
     to determine the velocity of a player.
     '''
-    v_max = 100
 
-    x_keys = [0]
-    y_keys = [0]
+    #image = pyglet.resource.image("brunette.png")
+    #image = pyglet.resource.image("black-hair.png")
+    #image = pyglet.resource.image("black-hair2.png")
+    image = pyglet.resource.image("spots.png")
+
+    def __init__(self, *args, **kwargs):
+        super(PlayerSprite, self).__init__(PlayerSprite.image, *args, **kwargs)
+
+        self.v_max = 100
+
+        self.x_keys = [0]
+        self.y_keys = [0]
 
     def go_left(self):  self.x_keys.append(-1)
     def go_right(self): self.x_keys.append( 1)
