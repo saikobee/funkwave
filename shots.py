@@ -26,6 +26,12 @@ class Shot(object):
         for factory in self.factories:
             factory.toggle()
 
+    def bullets(self):
+        '''Returns all bullets originating from this shot'''
+        return [bullet
+            for factory in self.factories
+                for bullet in factory.bullets]
+
 
 class Shot1(Shot):
     '''The player's shot: type 1'''

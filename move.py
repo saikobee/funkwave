@@ -58,16 +58,67 @@ class MainWindow(pyglet.window.Window):
         #    64
         #)
 
-        self.fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
+        self.text_colorf = (0.50, 0.50, 0.50, 0.75)
+        self.text_colori = ( 128,  128,  128,  224)
 
         self.bg = pyglet.resource.image("bg.png")
 
         self.time = 0
 
+        self.collisions = 0
+
+        self.coll_ctr = pyglet.text.Label(
+            anchor_x="right",
+            anchor_y="bottom",
+            halign="right",
+            x=WIDTH - 10,
+            y=5,
+            bold=True,
+            font_size=16,
+            color=self.text_colori
+        )
+
+        self.fps_display.label.color = self.text_colorf
+        #self.fps_display.label.color = self.text_colori
+
     def update(self, dt):
         self.time += dt
 
         self.sprite.update(dt)
+        
+        self.detect_collisions()
+
+    def detect_collisions(self):
+        collisions = rabbyt.collisions.collide_single(
+            self.sprite,
+            self.sprite.bullets()
+        )
+        self.collisions += len(collisions)
+        self.coll_ctr.text = "%i" % self.collisions
+
+    def on_draw(self):
+        if self.scale_needed(): self.viewport.begin()
+
+        rabbyt.clear()
+        self.reset_color_hack()
+
+        self.bg.blit(0, 0, 0)
+        self.sprite.render()
+
+        for shot in self.sprite.shots:
+            for factory in shot.factories:
+                rabbyt.render_unsorted(factory.bullets)
+
+        self.fps_display.label.draw()
+        self.coll_ctr.draw()
+
+        if self.scale_needed(): self.viewport.end()
+
+    def reset_color_hack(self):
+        glColor3f(1.0, 1.0, 1.0)
+
+    def scale_needed(self):
+        return not (self.width == WIDTH and self.height == HEIGHT)
 
     def on_key_press(self, symbol, modifiers):
         from pyglet.window import key
@@ -99,29 +150,6 @@ class MainWindow(pyglet.window.Window):
 
         elif symbol == key.A: self.sprite.stop_shot1()
         elif symbol == key.S: self.sprite.stop_shot2()
-
-    def on_draw(self):
-        if self.scale_needed(): self.viewport.begin()
-
-        rabbyt.clear()
-        self.reset_color_hack()
-
-        self.bg.blit(0, 0, 0)
-        self.sprite.render()
-
-        for shot in self.sprite.shots:
-            for factory in shot.factories:
-                rabbyt.render_unsorted(factory.bullets)
-
-        self.fps_display.label.draw()
-
-        if self.scale_needed(): self.viewport.end()
-
-    def reset_color_hack(self):
-        glColor3f(1.0, 1.0, 1.0)
-
-    def scale_needed(self):
-        return not (self.width == WIDTH and self.height == HEIGHT)
 
 def main():
     window_w = WIDTH

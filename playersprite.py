@@ -69,6 +69,16 @@ class PlayerSprite(IntSprite):
     def stop_down(self):
         if -1 in self.y_keys: self.y_keys.remove(-1)
 
+    def bullets(self):
+        '''Returns all bullets originating from this sprite'''
+        ## I hate Python
+        return [bullet
+            for shot in self.shots
+                for bullet in shot.bullets()]
+        #return [bullet for bullet in shot.bullets() for shot in self.shots]
+        #return sum([shot.bullets() for shot in self.shots], [])
+        #return sum(map(lambda shot: shot.bullets(), self.shots), [])
+
     def update(self, dt):
         '''\
         Simply update the position based on the current velocities.
