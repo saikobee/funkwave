@@ -58,8 +58,8 @@ class Shot2(Shot):
         self.offsets = (10, -10)
 
         self.factories = [LineFactory(
-                0,
-                RelPoint(self.sprite, 0, offset),
-                self.spawn_rate,
-                self.age_factor
+            0,
+            RelPoint(self.sprite, 0, offset),
+            self.spawn_rate,
+            self.age_factor
         ) for offset in self.offsets]
