@@ -23,7 +23,7 @@ from fshelper   import *
 
 from playersprite import PlayerSprite
 from factories    import ParaFactory
-from shots        import Shot1
+from shots        import Shot2
 
 random.seed(0)
 
@@ -89,7 +89,7 @@ class MainWindow(pyglet.window.Window):
         #    64
         #)
 
-        self.factory = Shot1(self.sprite)
+        self.factory = Shot2(self.sprite)
 
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
 

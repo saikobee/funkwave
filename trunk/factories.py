@@ -3,6 +3,8 @@ from pyglet import clock
 from bullet    import Bullet
 from intsprite import IntSprite
 
+from util import Point
+
 import math
 
 class ParaFactory(object):
@@ -87,6 +89,3 @@ class PolarFactory(ParaFactory):
 
         super(PolarFactory, self).__init__(x, y, sprite, spawn_rate, age_factor)
 
-class Point(object):
-    def __init__(point):
-        self.x, self.y = point
