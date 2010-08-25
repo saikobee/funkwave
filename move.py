@@ -23,7 +23,7 @@ from fshelper   import *
 
 from playersprite import PlayerSprite
 from factories    import ParaFactory
-from shots        import Shot2
+from shots        import Shot1, Shot2
 
 random.seed(0)
 
@@ -89,7 +89,8 @@ class MainWindow(pyglet.window.Window):
         #    64
         #)
 
-        self.factory = Shot2(self.sprite)
+        self.shot1 = Shot1(self.sprite)
+        self.shot2 = Shot2(self.sprite)
 
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
 
@@ -101,7 +102,8 @@ class MainWindow(pyglet.window.Window):
         self.time += dt
 
         self.sprite.update(dt)
-        self.factory.update(dt)
+        self.shot1.update(dt)
+        self.shot2.update(dt)
 
     def on_key_press(self, symbol, modifiers):
         from pyglet.window import key
@@ -120,7 +122,8 @@ class MainWindow(pyglet.window.Window):
         elif symbol == key.DOWN:  self.sprite.go_down()
         elif symbol == key.RIGHT: self.sprite.go_right()
 
-        elif symbol == key.S: self.factory.play()
+        elif symbol == key.A: self.shot1.play()
+        elif symbol == key.S: self.shot2.play()
 
     def on_key_release(self, symbol, modifiers):
         from pyglet.window import key
@@ -130,7 +133,8 @@ class MainWindow(pyglet.window.Window):
         elif symbol == key.DOWN:  self.sprite.stop_down()
         elif symbol == key.RIGHT: self.sprite.stop_right()
 
-        elif symbol == key.S: self.factory.pause()
+        elif symbol == key.A: self.shot1.pause()
+        elif symbol == key.S: self.shot2.pause()
 
     def on_draw(self):
         if self.scale_needed(): self.viewport.begin()
@@ -141,8 +145,9 @@ class MainWindow(pyglet.window.Window):
         self.bg.blit(0, 0, 0)
         self.sprite.render()
 
-        for factory in self.factory.factories:
-            rabbyt.render_unsorted(factory.bullets)
+        for shot in (self.shot1, self.shot2):
+            for factory in shot.factories:
+                rabbyt.render_unsorted(factory.bullets)
 
         #rabbyt.render_unsorted(self.factory.bullets)
 
