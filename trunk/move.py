@@ -89,9 +89,6 @@ class MainWindow(pyglet.window.Window):
         #    64
         #)
 
-        self.shot1 = Shot1(self.sprite)
-        self.shot2 = Shot2(self.sprite)
-
         fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
 
         self.bg = BG_IMG
@@ -102,8 +99,6 @@ class MainWindow(pyglet.window.Window):
         self.time += dt
 
         self.sprite.update(dt)
-        self.shot1.update(dt)
-        self.shot2.update(dt)
 
     def on_key_press(self, symbol, modifiers):
         from pyglet.window import key
@@ -122,8 +117,8 @@ class MainWindow(pyglet.window.Window):
         elif symbol == key.DOWN:  self.sprite.go_down()
         elif symbol == key.RIGHT: self.sprite.go_right()
 
-        elif symbol == key.A: self.shot1.play()
-        elif symbol == key.S: self.shot2.play()
+        elif symbol == key.A: self.sprite.try_shot1()
+        elif symbol == key.S: self.sprite.try_shot2()
 
     def on_key_release(self, symbol, modifiers):
         from pyglet.window import key
@@ -133,8 +128,8 @@ class MainWindow(pyglet.window.Window):
         elif symbol == key.DOWN:  self.sprite.stop_down()
         elif symbol == key.RIGHT: self.sprite.stop_right()
 
-        elif symbol == key.A: self.shot1.pause()
-        elif symbol == key.S: self.shot2.pause()
+        elif symbol == key.A: self.sprite.stop_shot1()
+        elif symbol == key.S: self.sprite.stop_shot2()
 
     def on_draw(self):
         if self.scale_needed(): self.viewport.begin()
@@ -145,7 +140,7 @@ class MainWindow(pyglet.window.Window):
         self.bg.blit(0, 0, 0)
         self.sprite.render()
 
-        for shot in (self.shot1, self.shot2):
+        for shot in self.sprite.shots:
             for factory in shot.factories:
                 rabbyt.render_unsorted(factory.bullets)
 

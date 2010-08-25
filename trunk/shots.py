@@ -11,6 +11,9 @@ class Shot(object):
         for factory in self.factories:
             factory.update(dt)
 
+    def paused(self):
+        return all(map(lambda f: f.paused, self.factories))
+
     def pause(self):
         for factory in self.factories:
             factory.pause()
