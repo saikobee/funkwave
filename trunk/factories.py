@@ -2,8 +2,8 @@ from pyglet import clock
 
 from bullet    import Bullet
 from intsprite import IntSprite
-
-from util import Point
+from util      import Point
+from const     import *
 
 import math
 
@@ -29,8 +29,18 @@ class ParaFactory(object):
         self.bullets = []
 
         self.paused = True
+        clock.schedule_interval(self.bullet_cleanup, 1.0/self.spawn_rate)
+        #clock.schedule(self.bullet_cleanup)
 
-        #clock.schedule_interval(self.spawn_bullet, 1.0/spawn_rate)
+    def bullet_cleanup(self, dt):
+        '''Cleans up offscreen bullets'''
+
+        in_range = lambda bullet: (
+            0 <= bullet.x <= WIDTH  and
+            0 <= bullet.y <= HEIGHT
+        )
+
+        self.bullets = filter(in_range, self.bullets)
 
     def spawn_bullet(self, dt):
         '''\
@@ -58,7 +68,7 @@ class ParaFactory(object):
         '''Resume the creation and aging of bullets.'''
         self.paused = False
         self.spawn_bullet(0)
-        clock.schedule_interval(self.spawn_bullet, 1.0/self.spawn_rate)
+        clock.schedule_interval(self.spawn_bullet,   1.0/self.spawn_rate)
 
     def toggle(self):
         '''Toggles between play and pause.'''
