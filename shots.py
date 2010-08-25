@@ -35,7 +35,7 @@ class Shot1(Shot):
         self.sprite = sprite
 
         self.spawn_rate =  15
-        self.age_factor = 512 + 128
+        self.age_factor = 512 + 256
         self.angles     = (6, 3, 0, -3, -6)
 
         self.factories = [LineFactory(
@@ -53,7 +53,7 @@ class Shot2(Shot):
         self.sprite = sprite
 
         self.spawn_rate =  30
-        self.age_factor = 512 + 128
+        self.age_factor = 512 + 512
         
         self.offsets = (10, -10)
 
