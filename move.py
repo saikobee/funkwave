@@ -24,61 +24,30 @@ from fshelper   import *
 from playersprite import PlayerSprite
 from factories    import ParaFactory
 from shots        import Shot1, Shot2
+from const        import *
 
 random.seed(0)
 
-from pyglet import font
-from pyglet import clock
-
 # Modify this scheduled method to pause, probably
-clock.schedule(rabbyt.add_time)
-
-# 16:9
-#w, h = size = 1366, 768
-#w, h = size = 1280, 720
-#w, h = size = 1024, 576
-#w, h = size =  800, 450
-w, h = size =  640, 360
-#w, h = size =  320, 180
-#w, h = size =  160,  90
-
-# 3:4
-#w, h = size = 800, 600
-#w, h = size = 640, 480
-
-# 16:10
-#w, h = size = 1680, 1050
-#w, h = size = 1440,  900
-#w, h = size = 1280,  800
-#w, h = size =  640,  400
-#w, h = size =  320,  200
-#w, h = size =  160,  100
-
-#filtered = True
-filtered = False
-
-fps_display = pyglet.clock.ClockDisplay()
-
-PLAYER_IMG = pyglet.resource.image("brunette.png")
-BG_IMG     = pyglet.resource.image("bg.png")
+pyglet.clock.schedule(rabbyt.add_time)
 
 class MainWindow(pyglet.window.Window):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         self.viewport = FixedResolutionViewport(
-            self, w, h,
-            #filtered=False
-            #filtered=True
-            filtered=filtered
+            self, WIDTH, HEIGHT,
+            filtered=FILTERED
         )
 
         self.set_mouse_visible(False)
 
         self.sprite = PlayerSprite()
-        self.sprite.xyf = (w/4, h/2) 
+        self.sprite.xyf = (WIDTH/4, HEIGHT/2) 
         #PlayerSprite.truncate(self.sprite)
         self.sprite.truncate_coords()
+
+        self.fps_display = pyglet.clock.ClockDisplay()
 
         #self.factory = ParaFactory(
         #    lambda t: 10*t,
@@ -89,9 +58,9 @@ class MainWindow(pyglet.window.Window):
         #    64
         #)
 
-        fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
+        self.fps_display.label.color = (0.5, 0.5, 0.5, 0.75)
 
-        self.bg = BG_IMG
+        self.bg = pyglet.resource.image("bg.png")
 
         self.time = 0
 
@@ -144,9 +113,7 @@ class MainWindow(pyglet.window.Window):
             for factory in shot.factories:
                 rabbyt.render_unsorted(factory.bullets)
 
-        #rabbyt.render_unsorted(self.factory.bullets)
-
-        fps_display.label.draw()
+        self.fps_display.label.draw()
 
         if self.scale_needed(): self.viewport.end()
 
@@ -154,11 +121,11 @@ class MainWindow(pyglet.window.Window):
         glColor3f(1.0, 1.0, 1.0)
 
     def scale_needed(self):
-        return not (self.width == w and self.height == h)
+        return not (self.width == WIDTH and self.height == HEIGHT)
 
 def main():
-    window_w = w
-    window_h = h
+    window_w = WIDTH
+    window_h = HEIGHT
 
     #window_w = 1280
     #window_h =  720
