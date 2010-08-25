@@ -30,6 +30,8 @@ class Shot(object):
 class Shot1(Shot):
     '''The player's shot: type 1'''
     def __init__(self, sprite):
+        super(Shot1, self).__init__()
+
         self.sprite = sprite
 
         self.spawn_rate =  15
@@ -46,6 +48,8 @@ class Shot1(Shot):
 class Shot2(Shot):
     '''The player's shot: type 2'''
     def __init__(self, sprite):
+        super(Shot2, self).__init__()
+
         self.sprite = sprite
 
         self.spawn_rate =  30
