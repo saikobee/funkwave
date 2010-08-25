@@ -36,7 +36,7 @@ class ParaFactory(object):
         '''Cleans up offscreen bullets'''
 
         in_range = lambda bullet: (
-            0 <= bullet.x <= WIDTH  and
+            0 <= bullet.x <= WIDTH and
             0 <= bullet.y <= HEIGHT
         )
 
