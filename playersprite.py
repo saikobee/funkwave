@@ -18,14 +18,15 @@ class PlayerSprite(IntSprite):
     def __init__(self, *args, **kwargs):
         super(PlayerSprite, self).__init__(PlayerSprite.image, *args, **kwargs)
 
-        self.v_max = 100
+        self.v_slow =  75
+        self.v_fast = 150
 
         self.x_keys = [0]
         self.y_keys = [0]
 
-        self.shots = (Shot1(self), Shot2(self))
-
         self.shot_keys = [None]
+
+        self.shots = (Shot1(self), Shot2(self))
 
     def try_shot1(self): self.shot_keys.append(0)
     def try_shot2(self): self.shot_keys.append(1)
@@ -42,13 +43,19 @@ class PlayerSprite(IntSprite):
 
         self.shots[1].pause()
 
+    def velocity(self):
+        if not self.shots[1].paused():
+            return self.v_slow
+        else:
+            return self.v_fast
+
     def go_left(self):  self.x_keys.append(-1)
     def go_right(self): self.x_keys.append( 1)
     def go_up(self):    self.y_keys.append( 1)
     def go_down(self):  self.y_keys.append(-1)
 
-    def vx(self): return self.x_keys[-1] * self.v_max
-    def vy(self): return self.y_keys[-1] * self.v_max
+    def vx(self): return self.x_keys[-1] * self.velocity()
+    def vy(self): return self.y_keys[-1] * self.velocity()
 
     def stop_left(self):
         if -1 in self.x_keys: self.x_keys.remove(-1)
