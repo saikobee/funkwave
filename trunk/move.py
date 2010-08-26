@@ -81,6 +81,8 @@ class MainWindow(pyglet.window.Window):
         self.fps_display.label.color = self.text_colorf
         #self.fps_display.label.color = self.text_colori
 
+        pyglet.clock.schedule_interval(self.update_coll_ctr, 0.10)
+
     def update(self, dt):
         self.time += dt
 
@@ -88,13 +90,16 @@ class MainWindow(pyglet.window.Window):
         
         self.detect_collisions()
 
+    def update_coll_ctr(self, dt):
+        self.coll_ctr.text = "%i" % self.collisions
+
     def detect_collisions(self):
         collisions = rabbyt.collisions.collide_single(
             self.sprite,
             self.sprite.bullets()
         )
         self.collisions += len(collisions)
-        self.coll_ctr.text = "%i" % self.collisions
+        #self.update_coll_ctr()
 
     def on_draw(self):
         if self.scale_needed(): self.viewport.begin()
