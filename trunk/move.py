@@ -28,7 +28,8 @@ from const        import *
 
 random.seed(0)
 
-# Modify this scheduled method to pause, probably
+# Modify this scheduled method to pause, probably.
+# Put it inside MainWindow and have it run off of MainWindow's time.
 pyglet.clock.schedule(rabbyt.add_time)
 
 class MainWindow(pyglet.window.Window):
