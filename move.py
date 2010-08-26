@@ -71,10 +71,11 @@ class MainWindow(pyglet.window.Window):
             anchor_x="right",
             anchor_y="bottom",
             halign="right",
+            font_name=None,
             x=WIDTH - 10,
             y=5,
             bold=True,
-            font_size=16,
+            font_size=24,
             color=self.text_colori
         )
 
