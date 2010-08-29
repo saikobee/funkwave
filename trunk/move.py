@@ -12,6 +12,7 @@ pyglet.resource.path = [
     "art",
     "alpha",
     "shapes",
+    "bosses",
     "bullets",
     "costumes",
     "backgrounds",
