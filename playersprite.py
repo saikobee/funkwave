@@ -2,7 +2,7 @@ import pyglet
 import rabbyt
 
 from intsprite import IntSprite
-from shots import Shot1, Shot2
+from shots     import Shot1, Shot2
 
 class PlayerSprite(IntSprite):
     '''\
