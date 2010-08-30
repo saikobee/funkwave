@@ -13,8 +13,8 @@ class PlayerSprite(IntSprite):
     #image = pyglet.resource.image("brunette.png")
     #image = pyglet.resource.image("black-hair.png")
     #image = pyglet.resource.image("black-hair2.png")
-    image = pyglet.resource.image("spots.png")
-    #image = pyglet.resource.image("bag.png")
+    #image = pyglet.resource.image("spots.png")
+    image = pyglet.resource.image("bag.png")
 
     def __init__(self, *args, **kwargs):
         super(PlayerSprite, self).__init__(PlayerSprite.image, *args, **kwargs)
