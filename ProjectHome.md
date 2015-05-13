@@ -1,0 +1,1 @@
+Funkwave is an extremely funky shoot 'em up game. More info will be filled in as the game progresses.
